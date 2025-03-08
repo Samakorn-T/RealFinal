@@ -63,14 +63,14 @@ combined_cas_unique['Manual_SMILES'] = combined_cas_unique['SMILES'].apply(
 # Save the processed file for manual input
 temp_folder = 'Temp'
 os.makedirs(temp_folder, exist_ok=True)
-Processed_file = 'Processed_Interaction_With_Manual_SMILES.xlsx'
+Processed_file = 'Processed_Interaction_With_Manual_SMILES.csv'
 Processed_path = os.path.join(temp_folder, Processed_file)
-combined_cas_unique.to_excel(Processed_path, index=False)
+combined_cas_unique.to_csv(Processed_path, index=False)
 print(f"Data saved for manual input to: {Processed_path}")
 
 # Read the file after manual input
-manual_smiles_path = os.path.join(temp_folder, 'Processed_Interaction_With_Manual_SMILES.xlsx')
-combined_cas_unique = pd.read_excel(manual_smiles_path)
+manual_smiles_path = os.path.join(temp_folder, 'Processed_Interaction_With_Manual_SMILES.csv')
+combined_cas_unique = pd.read_csv(manual_smiles_path)
 
 # Replace missing SMILES with Manual_SMILES if provided
 combined_cas_unique['SMILES'] = combined_cas_unique.apply(
@@ -98,9 +98,9 @@ combined_cas_unique['Fingerprint'] = combined_cas_unique['SMILES'].map(smiles_to
 # Temp Collect
 print("Phase 5: Collecting Temp")
 
-Processed_file = 'Processed_Interaction.xlsx'
+Processed_file = 'Processed_Interaction.csv'
 Processed_path = os.path.join(temp_folder, Processed_file)
-combined_cas_unique.to_excel(Processed_path, index=False)
+combined_cas_unique.to_csv(Processed_path, index=False)
 
 # %% Merge Data
 print("Merge Data")
@@ -114,9 +114,9 @@ input_path = os.path.join(input_folder, input_file)
 df_original = pd.read_excel(input_path, usecols=['CAS i', 'CAS j', 'Aij', 'Aji', 'Bij', 'Bji', 'Alpha'])
 
 # Read the processed file that contains CAS, Name, SMILES, and Fingerprint
-temp_file = 'Processed_Interaction.xlsx'
+temp_file = 'Processed_Interaction.csv'
 temp_path = os.path.join(temp_folder, temp_file)
-df_processed = pd.read_excel(temp_path)
+df_processed = pd.read_csv(temp_path)
 
 # Phase 2: Merge Processed Data with Original Data
 print("Phase 2: Merging Data")
@@ -149,22 +149,22 @@ df_merged = df_merged[['CAS i', 'CAS j', 'Name i', 'Name j', 'SMILES i', 'SMILES
 # Phase 3: Save the Final Merged Data
 print("Phase 3: Saving Merged Data")
 
-Merge_file = 'Merged_Interaction.xlsx'
+Merge_file = 'Merged_Interaction.csv'
 Merge_path = os.path.join(temp_folder, Merge_file)
-df_merged.to_excel(Merge_path, index=False)
+df_merged.to_csv(Merge_path, index=False)
 
 # Display final row count
 print(f"Total rows in merged data: {len(df_merged)}")
 # %% Swap Data
 print("Swap Data")
 # Input and output paths
-input_path = 'Temp/Merged_Interaction.xlsx'
-output_file = 'Expanded_Interaction_Data.xlsx'
+input_path = 'Temp/Merged_Interaction.csv'
+output_file = 'Expanded_Interaction_Data.csv'
 output_path = os.path.join(temp_folder, output_file)
 
-# Read the Excel file
-print("Reading Excel Data...")
-df = pd.read_excel(input_path)
+# Read the csv file
+print("Reading csv Data...")
+df = pd.read_csv(input_path)
 
 # Create the swapped DataFrame
 print("Creating swapped data...")
@@ -182,9 +182,9 @@ df_swapped[['Bij', 'Bji']] = df[['Bji', 'Bij']].values
 print("Combining original and swapped data...")
 df_combined = pd.concat([df, df_swapped], ignore_index=True)
 
-# Save the combined data to a new Excel file
+# Save the combined data to a new csv file
 print(f"Saving combined data to {output_file}...")
-df_combined.to_excel(output_path, index=False)
+df_combined.to_csv(output_path, index=False)
 print(f"Data saved successfully to: {output_path}")
 
 # Display final row count
@@ -192,12 +192,12 @@ print(f"Total rows after combining: {len(df_combined)}")
 
 # %% Expand Fingerprint
 print("Expand Fingerprint")
-# Reading Excel data
-input_file = 'Expanded_Interaction_Data.xlsx'
+# Reading csv data
+input_file = 'Expanded_Interaction_Data.csv'
 input_path = os.path.join(temp_folder, input_file)
 
-print("Reading Excel data...")
-df = pd.read_excel(input_path)
+print("Reading csv data...")
+df = pd.read_csv(input_path)
 
 def expand_fingerprint_column_safe(df, col_name, prefix, n_bits=2048):
     """Expand a fingerprint list into multiple columns, handling missing or invalid data."""
@@ -226,11 +226,11 @@ print("Expanding fingerprints...")
 df = expand_fingerprint_column_safe(df, 'Fingerprint i', 'FP_i', n_bits=2048)
 df = expand_fingerprint_column_safe(df, 'Fingerprint j', 'FP_j', n_bits=2048)
 
-# Save the expanded DataFrame to a new Excel file
+# Save the expanded DataFrame to a new csv file
 output_folder = 'Prepare_datavisual'
 os.makedirs(output_folder, exist_ok=True)
-output_file = 'Expanded_Fingerprints_Data.xlsx'
+output_file = 'Expanded_Fingerprints_Data.csv'
 output_path = os.path.join(output_folder, output_file)
-df.to_excel(output_path, index=False)
+df.to_csv(output_path, index=False)
 
 print(f"Expanded data saved to: {output_path}")
