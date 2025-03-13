@@ -1,0 +1,5 @@
+Model,Target,Best Parameters,MAE,MSE,R2
+OLS,Bij,N/A,923.3665506642932,3341970.045585246,0.0571498629968773
+DecisionTree,Bij,"OrderedDict([('criterion', 'absolute_error'), ('max_depth', 19), ('min_samples_leaf', 1), ('min_samples_split', 2)])",575.8381910236761,2903843.967990603,0.1807557680918196
+SVR,Bij,"OrderedDict([('C', 100.0), ('epsilon', 0.2), ('kernel', 'rbf')])",689.0651915327917,3427663.4261655756,0.032973699082076036
+XGBoost,Bij,"OrderedDict([('colsample_bytree', 1.0), ('gamma', 1.0), ('learning_rate', 0.013325611124310612), ('max_depth', 20), ('n_estimators', 484), ('reg_alpha', 0.0), ('reg_lambda', 10.0), ('subsample', 0.6)])",560.6406194139001,1946390.3861599774,0.450876453941668
