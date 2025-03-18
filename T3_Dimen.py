@@ -30,7 +30,7 @@ y = data["Bij"]  # Modify if training for other targets
 target_name = y.name  # Store the name of the target variable
 
 # **Threshold values to iterate over**
-thresholds = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5]
+thresholds = [0.00, 0.01, 0.02, 0.03, 0.04, 0.05]
 
 for threshold in thresholds:
     logger.info(f"Training model with VarianceThreshold = {threshold}")

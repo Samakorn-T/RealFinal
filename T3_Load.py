@@ -32,7 +32,7 @@ y_actual = data["Bij"]
 xgb_folder = "T3_Folder"
 model_predictions = {"Actual": y_actual}
 
-for threshold in [0.0, 0.1, 0.2, 0.3, 0.4, 0.5]:
+for threshold in [0.00, 0.01, 0.02, 0.03, 0.04, 0.05]:
     selected_features_path = os.path.join(xgb_folder, f"selected_features_Bij_thresh{threshold}.txt")
     
     if os.path.exists(selected_features_path):
