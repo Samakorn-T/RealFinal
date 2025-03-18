@@ -1,0 +1,4 @@
+Target: Bij
+Threshold: 0.0
+Best Parameters:
+OrderedDict([('colsample_bytree', 0.6834031701676737), ('gamma', 3.8582264809444604), ('learning_rate', 0.013573575298017157), ('max_depth', 50), ('n_estimators', 343), ('reg_alpha', 0.6849677118397532), ('reg_lambda', 10.0), ('subsample', 0.7)])
